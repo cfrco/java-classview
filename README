@@ -1,0 +1,8 @@
+USEAGE :
+    java ClassView {ClassName} {View}
+    
+    {View}  : ( constructor | dconstructor | method | dmethod | field | dfield )
+
+Example :
+    java ClassView java.lang.String method
+    java ClassView java.lang.String method |grep replace
