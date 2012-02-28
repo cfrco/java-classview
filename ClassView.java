@@ -16,6 +16,10 @@ class ClassView
             System.out.println(c);
             if(args.length > 1)
             {
+                if(args[1].equals("constructor"))
+                    printMember(c.getConstructors(),hiddenPrefixList);
+                if(args[1].equals("dconstructor"))
+                    printMember(c.getDeclaredConstructors(),hiddenPrefixList);
                 if(args[1].equals("method"))
                     printMember(c.getMethods(),hiddenPrefixList);
                 if(args[1].equals("dmethod"))
