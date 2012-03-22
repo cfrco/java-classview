@@ -7,7 +7,7 @@ USEAGE :
     * You can also ignore package ,if it is cotained in defaultPackage
     * defaultPackage : "java.lang","java.util"
 
-Example :
+EXAMPLE :
     java ClassView java.lang.String method
     java ClassView java.lang.String method |grep replace
 
@@ -15,3 +15,16 @@ Example :
     java ClassView String 
     java ClassView Scanner
     java ClassView Scanner method
+
+USEFUL-PyScript :
+    jview.py
+
+    You can put this script to your $PATH ,
+    Maybe you can do this :
+    
+        cp jview.py ~/bin/jview
+
+    
+    - EXAMPLE :
+        jview String
+        jview Integer dmethod
