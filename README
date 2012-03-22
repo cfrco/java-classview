@@ -21,7 +21,7 @@ USEFUL-PyScript :
 
     You can put this script to your $PATH ,
     Maybe you can do this :
-    
+        #After that,edit jview.py for your env.
         cp jview.py ~/bin/jview
 
     
