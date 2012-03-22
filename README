@@ -1,8 +1,17 @@
 USEAGE :
-    java ClassView {ClassName} {View}
+    java ClassView {ClassName} [{View}]
     
     {View}  : ( constructor | dconstructor | method | dmethod | field | dfield )
+              * If you don't enter {View},it will print all
+    
+    * You can also ignore package ,if it is cotained in defaultPackage
+    * defaultPackage : "java.lang","java.util"
 
 Example :
     java ClassView java.lang.String method
     java ClassView java.lang.String method |grep replace
+
+    #easier
+    java ClassView String 
+    java ClassView Scanner
+    java ClassView Scanner method
