@@ -1,4 +1,9 @@
 import java.lang.reflect.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 class ClassView
 {
@@ -60,12 +65,35 @@ class ClassView
     }
     private static void printAll(Class<?> c,String[] hiddenPrefixList)
     {
-        printMember(c.getConstructors(),hiddenPrefixList);
-        printMember(c.getDeclaredConstructors(),hiddenPrefixList);
-        printMember(c.getMethods(),hiddenPrefixList);
-        printMember(c.getDeclaredMethods(),hiddenPrefixList);
-        printMember(c.getFields(),hiddenPrefixList);
-        printMember(c.getDeclaredFields(),hiddenPrefixList);
+        List<String> list = new ArrayList<String>();
+
+        list.addAll(getMember(c.getConstructors(),hiddenPrefixList));
+        list.addAll(getMember(c.getDeclaredConstructors(),hiddenPrefixList));
+        list.addAll(getMember(c.getMethods(),hiddenPrefixList));
+        list.addAll(getMember(c.getDeclaredMethods(),hiddenPrefixList));
+        list.addAll(getMember(c.getFields(),hiddenPrefixList));
+        list.addAll(getMember(c.getDeclaredFields(),hiddenPrefixList));
+
+        Object[] arr = list.toArray();
+
+        Set<String> set = new HashSet<String>();
+
+        for(Object e : arr)
+            set.add((String)e);
+        
+        arr = set.toArray();
+        String[] sarr = new String[arr.length];
+
+        for(int i=0;i<arr.length;++i)
+            sarr[i] = (String)arr[i];
+
+        Arrays.sort(sarr);
+
+        for(int i=0;i<arr.length;++i)
+        {
+            System.out.print("    ");
+            System.out.println(sarr[i]);
+        }
     }
     private static void printMember(Member[] mems,String[] hiddenPrefixList)
     {
@@ -82,5 +110,22 @@ class ClassView
             System.out.print("    ");
             System.out.println(out);
         }
+    }
+    private static List<String> getMember(Member[] mems,String[] hiddenPrefixList)
+    {
+
+        List<String> list = new ArrayList<String>();
+        for(Member m : mems)
+        {
+            if(m.getDeclaringClass() == Object.class)
+                continue;
+
+            String out = m.toString();
+
+            for(String hide : hiddenPrefixList)
+                out = out.replace(hide,"");
+            list.add(out); 
+        }
+        return list;
     }
 }
